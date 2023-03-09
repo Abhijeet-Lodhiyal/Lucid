@@ -1,7 +1,7 @@
 const userRouter = require("express").Router()
 const bcrypt = require("bcrypt")
 const User = require("../models/User")
-
+const fs = require('fs')
 
 // update user
 userRouter.put("/:id", async (req, res) => {
@@ -16,6 +16,24 @@ userRouter.put("/:id", async (req, res) => {
             }
         }
         try {
+            const user = await User.findById(req.body.userId)
+            if(req.body.profilePicture)
+            {
+                try {
+                    fs.unlinkSync('./public/images/'+user.profilePicture)
+                } catch (error) {
+                        console.log(error)
+                }
+            }
+            if(req.body.coverPicture)
+            {
+                try {
+                    fs.unlinkSync('./public/images/'+user.coverPicture)
+                    
+                } catch (error) {
+                    console.log(error)
+                }
+            }
             await User.findByIdAndUpdate(req.params.id, { $set: req.body })
             res.status(200).json("Account has been updated!")
         }
@@ -74,7 +92,7 @@ userRouter.get("/friends/:userId", async (req,res) => {
         res.status(200).json(friendsList)
     }catch(err)
     {
-        res.status(500).json(err)
+        res.status(404).json("No friends found")
     }
 })
 

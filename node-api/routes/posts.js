@@ -23,6 +23,7 @@ postRouter.put("/:id", async (req, res) => {
     try {
         const post = await Post.findById(req.params.id)
         if (post.userId === req.body.userId) {
+           
             await post.updateOne({ $set: req.body })
             res.status(200).json("Post updated successfully!")
         } else {
@@ -71,7 +72,12 @@ postRouter.delete("/userDelete/:userId" , async (req,res) => {
             imgNames.push(im.img)
         })
         imgNames.map( (imageToBeDeleted) => {
-            fs.unlinkSync("./public/images/"+imageToBeDeleted)
+            try {
+                if(imageToBeDeleted)
+                    fs.unlinkSync("./public/images/"+imageToBeDeleted)
+            } catch (error) {
+                console.log(error)               
+            }
         })
         await Post.deleteMany({userId:req.params.userId})
         res.status(200).json("Deleted User")
@@ -106,6 +112,16 @@ postRouter.get("/:id", async (req, res) => {
         res.status(200).json(post)
     } catch (err) {
         res.status(500).json(err)
+    }
+})
+
+postRouter.get("/search/:desc", async (req,res) => {
+    try {
+        const posts = await Post.find({desc:req.params.desc})
+        res.status(200).json(posts)
+    } catch (err) { 
+        res.status(404).json("Post not found")
+        
     }
 })
 
