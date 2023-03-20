@@ -56,6 +56,6 @@ app.use("/api/convo",convoRoute)
 app.use("/api/messages",messagesRoute)
 
 
-app.listen(process.env.PORT || 3000, () => {
+app.listen(process.env.PORT  || 3000, () => {
     console.log("Server running")
 })
