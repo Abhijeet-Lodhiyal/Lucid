@@ -1,0 +1,38 @@
+dont use newUrlParser
+
+
+bcrypt : used to hash passwords   .genSalt   .hash
+
+salt : random numbers to be added with password before hashing
+
+
+
+
+flex basis to adjust size
+
+
+overflow scrollllllllllllllllllllllllllllllllllll
+
+webkit scroll
+webkit scroll thumb (jo upar niche hota )
+webkit scroll track (pura)
+
+
+
+object cover
+
+ctl alt up
+ctl shift l (all same words select)
+
+
+pst?.desc  // agar json me koi data present na ho to safe rehne ke liye
+
+
+Users.filter return an array
+
+always return in a map
+
+
+skew after and left-0 right-0 margin-auto
+
+
