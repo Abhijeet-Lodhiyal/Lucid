@@ -48,6 +48,9 @@ app.post("/api/upload",upload.single("file"),(req,res) => {
 })
 
 //requests 
+app.get("/", (req,res) => {
+    res.status(200).json("HELLO")
+})
 
 app.use("/api/users", userRoute)
 app.use("/api/auth", authRoute)
@@ -56,6 +59,9 @@ app.use("/api/convo",convoRoute)
 app.use("/api/messages",messagesRoute)
 
 
-app.listen(process.env.PORT  || 3000, () => {
+app.listen( 8011, () => {
     console.log("Server running")
 })
+
+
+module.exports = app
